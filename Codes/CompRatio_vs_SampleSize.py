@@ -33,10 +33,10 @@ compression_ratio_df = merged_df[['Chromosome', 'Sample_Size', 'Compression_Rati
 compression_ratio_df.loc[:,'Input_file_size_compress'] = compression_ratio_df['Input_file_size_compress'] / (1024**3)
 
 # Define the colormap with unique colors
-num_colors = len(df['Chromosome'].unique())
+num_colors = 22
 cmap = plt.cm.get_cmap("gist_rainbow", num_colors)  # 'tab20' or 'hsv', or any other suitable colormap
 # Assign colors to each chromosome
-color_map = {chromosome: cmap(i) for i, chromosome in enumerate(df['Chromosome'].unique())}
+color_map = {chromosome: cmap(chromosome) for i, chromosome in enumerate(np.sort(df['Chromosome'].unique()))}
 
 # Display the result DataFrame
 print(compression_ratio_df)

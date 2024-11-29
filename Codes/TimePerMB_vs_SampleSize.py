@@ -7,6 +7,7 @@ Created on Tue Nov 12 16:21:16 2024
 
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 #%%
@@ -42,13 +43,13 @@ ALL_random_access_df = ALL_df[ALL_df['Command'] == 'random_access']
 
 # Define a color map for chromosomes
 colors = plt.cm.tab10  # You can also use other color maps like 'viridis', 'plasma', etc.
-unique_chromosomes = df['Chromosome'].unique()
+unique_chromosomes = np.sort(df['Chromosome'].unique())
 
 # Define the colormap with unique colors
-num_colors = len(unique_chromosomes)
+num_colors = 22
 cmap = plt.cm.get_cmap("gist_rainbow", num_colors)  # 'tab20' or 'hsv', or any other suitable colormap
 # Assign colors to each chromosome
-color_map = {chromosome: cmap(i) for i, chromosome in enumerate(unique_chromosomes)}
+color_map = {chromosome: cmap(chromosome) for i, chromosome in enumerate(unique_chromosomes)}
 
 
 # Plot for the "compress" command
@@ -149,13 +150,13 @@ ALL_random_access_one_sample_df = ALL_df[ALL_df['Command'] == 'random_access_one
 
 # Define a color map for chromosomes
 colors = plt.cm.tab10  # You can also use other color maps like 'viridis', 'plasma', etc.
-unique_chromosomes = df['Chromosome'].unique()
+unique_chromosomes = np.sort(df['Chromosome'].unique())
 
 # Define the colormap with unique colors
-num_colors = len(unique_chromosomes)
+num_colors = 22
 cmap = plt.cm.get_cmap("gist_rainbow", num_colors)  # 'tab20' or 'hsv', or any other suitable colormap
 # Assign colors to each chromosome
-color_map = {chromosome: cmap(i) for i, chromosome in enumerate(unique_chromosomes)}
+color_map = {chromosome: cmap(chromosome) for i, chromosome in enumerate(unique_chromosomes)}
 
 
 # Plot for the "compress" command
