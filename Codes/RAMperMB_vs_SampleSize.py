@@ -5,13 +5,6 @@ Created on Tue Nov 12 17:01:12 2024
 @author: pahermans
 """
 
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Nov 12 16:21:16 2024
-
-@author: pahermans
-"""
-
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -19,7 +12,7 @@ import matplotlib.pyplot as plt
 #%%
 ################# ALL CHROM, SOME TESTS ##########################
 # Load the CSV file
-df = pd.read_csv("E:/VM_data/script/gsc_usage_log_chromALL.csv")
+df = pd.read_csv("E:/VM_data/Git/VCF_compression_benchmarking/Data/gsc_usage_log_chromALL.csv")
 
 
 # Convert Input_file_size from bytes to MB
@@ -56,9 +49,12 @@ plt.plot(ALL_compress_df['Sample_Size'], ALL_compress_df['RAM_per_MB'],marker='o
 plt.xlabel('Sample Size')
 plt.ylabel('RAM per MB ')
 plt.xscale("log")
-plt.title('RAM per MB vs Sample Size for Compress Command')
+titre = "RAM per MB vs Sample Size for Compress Command"
+plt.title(titre)
 plt.legend(title='Chromosomes',bbox_to_anchor=(1.2, 1.1))
 plt.grid(True)
+plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
+
 plt.show()
 
 # Plot for the "decompress" command
@@ -69,9 +65,11 @@ plt.plot(ALL_decompress_df['Sample_Size'], ALL_decompress_df['RAM_per_MB'],marke
 plt.xlabel('Sample Size')
 plt.ylabel('RAM per MB')
 plt.xscale("log")
-plt.title('RAM per MB vs Sample Size for Decompress Command')
+titre = 'RAM per MB vs Sample Size for Decompress Command'
+plt.title(titre)
 plt.legend(title='Chromosomes',bbox_to_anchor=(1.2, 1.1))
 plt.grid(True)
+plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
 plt.show()
 
 # Plot for the "random_access" command with averaged Time_per_MB
@@ -82,9 +80,11 @@ plt.plot(ALL_random_access_df['Sample_Size'], ALL_random_access_df['RAM_per_MB']
 plt.xlabel('Sample Size')
 plt.xscale("log")
 plt.ylabel('RAM per MB')
-plt.title('RAM per MB vs Sample Size for Random Access Command (Mean)')
+titre = 'RAM per MB vs Sample Size for Random Access Command'
+plt.title(titre)
 plt.legend(title='Chromosomes',bbox_to_anchor=(1.2, 1.1))
 plt.grid(True)
+plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
 plt.show()
 
 
@@ -92,7 +92,7 @@ plt.show()
 ################# SOME CHROM, FULL TESTS ##########################
 
 # Load the CSV file
-df = pd.read_csv("E:/VM_data/script/gsc_usage_tests.csv")
+df = pd.read_csv("E:/VM_data/Git/VCF_compression_benchmarking/Data/gsc_usage_tests.csv")
 
 
 # Convert Input_file_size from bytes to MB
@@ -134,9 +134,11 @@ plt.plot(ALL_compress_df['Sample_Size'], ALL_compress_df['RAM_per_MB'],marker='o
 plt.xlabel('Sample Size')
 plt.ylabel('RAM per MB ')
 plt.xscale("log")
-plt.title('RAM per MB vs Sample Size for Compress Command')
+titre = 'RAM per MB vs Sample Size for Compress Command (bis)'
+plt.title(titre)
 plt.legend(title='Chromosomes',bbox_to_anchor=(1.2, 1.1))
 plt.grid(True)
+plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
 plt.show()
 
 # Plot for the "decompress" command
@@ -147,9 +149,11 @@ plt.plot(ALL_decompress_df['Sample_Size'], ALL_decompress_df['RAM_per_MB'],marke
 plt.xlabel('Sample Size')
 plt.ylabel('RAM per MB')
 plt.xscale("log")
-plt.title('RAM per MB vs Sample Size for Decompress Command')
+titre = 'RAM per MB vs Sample Size for Decompress Command (bis)'
+plt.title(titre)
 plt.legend(title='Chromosomes',bbox_to_anchor=(1.2, 1.1))
 plt.grid(True)
+plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
 plt.show()
 
 # Plot for the "decompress_one_sample" command
@@ -160,9 +164,11 @@ plt.plot(ALL_decompress_one_sample_df['Sample_Size'], ALL_decompress_one_sample_
 plt.xlabel('Sample Size')
 plt.ylabel('RAM per MB')
 plt.xscale("log")
-plt.title('RAM per MB vs Sample Size for Decompress_one_sample Command')
+titre = 'RAM per MB vs Sample Size for Decompress_one_sample Command (bis)'
+plt.title(titre)
 plt.legend(title='Chromosomes',bbox_to_anchor=(1.2, 1.1))
 plt.grid(True)
+plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
 plt.show()
 
 # Plot for the "random_access" command
@@ -173,9 +179,11 @@ plt.plot(ALL_random_access_df['Sample_Size'], ALL_random_access_df['RAM_per_MB']
 plt.xlabel('Sample Size')
 plt.ylabel('RAM per MB')
 plt.xscale("log")
-plt.title('RAM per MB vs Sample Size for random_access Command')
+titre = 'RAM per MB vs Sample Size for random_access Command (bis)'
+plt.title(titre)
 plt.legend(title='Chromosomes',bbox_to_anchor=(1.2, 1.1))
 plt.grid(True)
+plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
 plt.show()
 
 # Plot for the "random_access_one_sample" command
@@ -186,7 +194,9 @@ plt.plot(ALL_random_access_one_sample_df['Sample_Size'], ALL_random_access_one_s
 plt.xlabel('Sample Size')
 plt.ylabel('RAM per MB')
 plt.xscale("log")
-plt.title('RAM per MB vs Sample Size for random_access_one_sample Command')
+titre = 'RAM per MB vs Sample Size for random_access_one_sample Command (bis)'
+plt.title(titre)
 plt.legend(title='Chromosomes',bbox_to_anchor=(1.2, 1.1))
 plt.grid(True)
+plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
 plt.show()

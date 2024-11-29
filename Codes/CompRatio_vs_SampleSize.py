@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 # Load the CSV file into a DataFrame
-df = pd.read_csv("E:/VM_data/script/gsc_usage_log_chromALL.csv")
+df = pd.read_csv("E:/VM_data/Git/VCF_compression_benchmarking/Data/gsc_usage_log_chromALL.csv")
 
 # Filter the rows by Command to get separate DataFrames for 'compress' and 'decompress'
 compress_df = df[df['Command'] == 'compress'][['Chromosome', 'Sample_Size', 'Input_file_size']].groupby(['Chromosome', 'Sample_Size'], as_index=False).mean()
@@ -54,10 +54,11 @@ for chromosome, group in compression_ratio_df.groupby('Chromosome'):
 plt.xlabel('Input file size (uncompressed) in GB')
 plt.ylabel('Compression Ratio')
 plt.xscale("log")
-plt.title('Compression Ratio vs Sample Size for Each Chromosome')
+plt.title('Compression Ratio vs Input filesize for Each Chromosome')
 plt.legend(title='Chromosomes',bbox_to_anchor=(1.2, 1.1))
 plt.grid(True)
 
+plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\Compression Ratio vs Input filesize", bbox_inches='tight')
 # Display the plot
 plt.show()
 
@@ -75,6 +76,8 @@ plt.xscale("log")
 plt.title('Compression Ratio vs Sample Size for Each Chromosome')
 plt.legend(title='Chromosomes',bbox_to_anchor=(1.2, 1.1))
 plt.grid(True)
+
+plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\Compression Ratio vs Sample Size" ,bbox_inches='tight' )
 
 # Display the plot
 plt.show()
