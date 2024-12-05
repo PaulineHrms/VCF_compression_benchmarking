@@ -53,7 +53,7 @@ for chromosome, group in compression_ratio_df.groupby('Chromosome'):
 # Add labels and title
 plt.xlabel('Input file size (uncompressed) in GB')
 plt.ylabel('Compression Ratio')
-plt.xscale("log")
+#plt.xscale("log")
 plt.title('Compression Ratio vs Input filesize for Each Chromosome')
 plt.legend(title='Chromosomes',bbox_to_anchor=(1.2, 1.1))
 plt.grid(True)
@@ -72,7 +72,7 @@ for chromosome, group in compression_ratio_df.groupby('Chromosome'):
 # Add labels and title
 plt.xlabel('Sample Size')
 plt.ylabel('Compression Ratio')
-plt.xscale("log")
+#plt.xscale("log")
 plt.title('Compression Ratio vs Sample Size for Each Chromosome')
 plt.legend(title='Chromosomes',bbox_to_anchor=(1.2, 1.1))
 plt.grid(True)
