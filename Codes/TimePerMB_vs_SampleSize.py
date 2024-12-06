@@ -89,28 +89,14 @@ for chromosome, group in random_access_df.groupby('Chromosome'):
 plt.plot(ALL_random_access_df['Sample_Size'], ALL_random_access_df['Time_per_MB'],marker='o', color='black', label="Mean")
 plt.xlabel('Sample Size')
 plt.xscale("log")
-titre = 'Time per MB (seconds) for random access'
+titre = 'Time per MB vs Sample Size for Random Access Command'
 plt.ylabel(titre)
-plt.title('Time per MB vs Sample Size for Random Access Command (Mean)')
+plt.title('Time per MB vs Sample Size for Random Access Command')
 plt.legend(title='Chromosomes',bbox_to_anchor=(1.2, 1.1))
 plt.grid(True)
 plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
 plt.show()
 
-# Plot for the "random_access" command with averaged Time_Seconds
-plt.figure(figsize=(8, 5))
-for chromosome, group in random_access_df.groupby('Chromosome'):
-    plt.plot(group['Sample_Size'], group['Time_Seconds'], marker='o', color=color_map[chromosome], label=f'Chr {chromosome}')
-plt.plot(ALL_random_access_df['Sample_Size'], ALL_random_access_df['Time_Seconds'],marker='o', color='black', label="Mean")
-plt.xlabel('Sample Size')
-plt.xscale("log")
-titre = 'Time (seconds) for random access'
-plt.ylabel(titre)
-plt.title('Time vs Sample Size for Random Access Command (Mean)')
-plt.legend(title='Chromosomses',bbox_to_anchor=(1.21, 1.1))
-plt.grid(True)
-plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
-plt.show()
 
 
 #%%
@@ -192,12 +178,12 @@ plt.show()
 # Plot for the "decompress_one_sample" command
 plt.figure(figsize=(8, 5))
 for chromosome, group in decompress_one_sample_df.groupby('Chromosome'):
-    plt.plot(group['Sample_Size'], group['Time_per_MB'], marker='o', color=color_map[chromosome], label=f'Chr {chromosome}')
-plt.plot(ALL_decompress_one_sample_df['Sample_Size'], ALL_decompress_one_sample_df['Time_per_MB'],marker='o', color='black', label="Mean")
+    plt.plot(group['Sample_Size'], group['Time_Seconds'], marker='o', color=color_map[chromosome], label=f'Chr {chromosome}')
+plt.plot(ALL_decompress_one_sample_df['Sample_Size'], ALL_decompress_one_sample_df['Time_Seconds'],marker='o', color='black', label="Mean")
 plt.xlabel('Sample Size')
-plt.ylabel('Time per MB (seconds)')
+plt.ylabel('Time (seconds)')
 plt.xscale("log")
-titre = 'Time per MB vs Sample Size for Decompress_One_Sample Command'
+titre = 'Time vs Sample Size for Decompress_One_Sample Command'
 plt.title(titre)
 plt.legend(title='Chromosomes')#,bbox_to_anchor=(1.21, 1))
 plt.grid(True)
@@ -211,7 +197,7 @@ for chromosome, group in random_access_df.groupby('Chromosome'):
 plt.plot(ALL_random_access_df['Sample_Size'], ALL_random_access_df['Time_per_MB'],marker='o', color='black', label="Mean")
 plt.xlabel('Sample Size')
 plt.xscale("log")
-plt.ylabel('Time per MB (seconds)')
+plt.ylabel('Time per MB (sec/MB)')
 titre = 'Time per MB vs Sample Size for Random Access Command (bis)'
 plt.title(titre)
 plt.legend(title='Chromosomes')#,bbox_to_anchor=(1.21, 1))
@@ -219,65 +205,6 @@ plt.grid(True)
 plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
 plt.show()
 
-# Plot for the "random_access" command with averaged Time_Seconds
-plt.figure(figsize=(8, 5))
-for chromosome, group in random_access_df.groupby('Chromosome'):
-    plt.plot(group['Sample_Size'], group['Time_Seconds'], marker='o', color=color_map[chromosome], label=f'Chr {chromosome}')
-plt.plot(ALL_random_access_df['Sample_Size'], ALL_random_access_df['Time_Seconds'],marker='o', color='black', label="Mean")
-plt.xlabel('Sample Size')
-#plt.xscale("log")
-plt.ylabel('Time (seconds)')
-titre = 'Time vs Sample Size for Random Access Command (bis)'
-plt.title(titre)
-plt.legend(title='Chromosomses')#,bbox_to_anchor=(1.21, 1))
-plt.grid(True)
-plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
-plt.show()
-
-# Plot for the "random_access" command with averaged Time_Seconds
-plt.figure(figsize=(8, 5))
-for chromosome, group in random_access_df.groupby('Chromosome'):
-    plt.plot(group['Sample_Size'], group['Time_Seconds'], marker='o', color=color_map[chromosome], label=f'Chr {chromosome}')
-plt.plot(ALL_random_access_df['Sample_Size'], ALL_random_access_df['Time_Seconds'],marker='o', color='black', label="Mean")
-plt.xlabel('Sample Size')
-plt.xscale("log")
-plt.ylabel('Time (seconds)')
-titre = 'Time vs Sample Size for Random Access Command (bis) non log-scale'
-plt.title(titre)
-plt.legend(title='Chromosomses')#,bbox_to_anchor=(1.21, 1))
-plt.grid(True)
-plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
-plt.show()
-
-# Plot for the "random_access_one_sample" command with averaged Time_per_MB
-plt.figure(figsize=(8, 5))
-for chromosome, group in random_access_one_sample_df.groupby('Chromosome'):
-    plt.plot(group['Sample_Size'], group['Time_per_MB'], marker='o', color=color_map[chromosome], label=f'Chr {chromosome}')
-plt.plot(ALL_random_access_one_sample_df['Sample_Size'], ALL_random_access_one_sample_df['Time_per_MB'],marker='o', color='black', label="Mean")
-plt.xlabel('Sample Size')
-plt.xscale("log")
-plt.ylabel('Time per MB (seconds)')
-titre = 'Time per MB vs Sample Size for Random Access_one_sample Command'
-plt.title(titre)
-plt.legend(title='Chromosomes')#,bbox_to_anchor=(1.21, 1))
-plt.grid(True)
-plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
-plt.show()
-
-# Plot for the "random_access" command with averaged Time_Seconds
-plt.figure(figsize=(8, 5))
-for chromosome, group in random_access_one_sample_df.groupby('Chromosome'):
-    plt.plot(group['Sample_Size'], group['Time_Seconds'], marker='o', color=color_map[chromosome], label=f'Chr {chromosome}')
-plt.plot(ALL_random_access_one_sample_df['Sample_Size'], ALL_random_access_one_sample_df['Time_Seconds'],marker='o', color='black', label="Mean")
-plt.xlabel('Sample Size')
-#plt.xscale("log")
-plt.ylabel('Time (seconds)')
-titre = 'Time vs Sample Size for Random Access_one_sample Command non log-scale'
-plt.title(titre)
-plt.legend(title='Chromosomses')#,bbox_to_anchor=(1.21, 1))
-plt.grid(True)
-plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
-plt.show()
 
 # Plot for the "random_access" command with averaged Time_Seconds
 plt.figure(figsize=(8, 5))

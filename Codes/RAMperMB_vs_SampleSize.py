@@ -22,13 +22,13 @@ df['Input_file_size_MB'] = df['Input_file_size'] / 1048576
 df['RAM_per_MB'] = df['Memory_Used_MB'] / df['Input_file_size_MB']
 
 # Filter data for each command
-compress_df = df[df['Command'] == 'compress'][['Chromosome', 'Sample_Size',  'Input_file_size_MB', 'RAM_per_MB']].groupby(['Chromosome', 'Sample_Size'], as_index=False).mean()
-decompress_df = df[df['Command'] == 'decompress'][['Chromosome', 'Sample_Size',  'Input_file_size_MB', 'RAM_per_MB']].groupby(['Chromosome', 'Sample_Size'], as_index=False).mean()
+compress_df = df[df['Command'] == 'compress'][['Chromosome', 'Sample_Size',  'Input_file_size_MB', 'RAM_per_MB','Memory_Used_MB']].groupby(['Chromosome', 'Sample_Size'], as_index=False).mean()
+decompress_df = df[df['Command'] == 'decompress'][['Chromosome', 'Sample_Size',  'Input_file_size_MB', 'RAM_per_MB','Memory_Used_MB']].groupby(['Chromosome', 'Sample_Size'], as_index=False).mean()
 
 # For random_access, calculate the mean Time_per_MB for each Sample_Size
-random_access_df = df[df['Command'] == 'random_access'][['Chromosome', 'Sample_Size', 'Input_file_size_MB', 'RAM_per_MB']].groupby(['Chromosome', 'Sample_Size'], as_index=False).mean()
+random_access_df = df[df['Command'] == 'random_access'][['Chromosome', 'Sample_Size', 'Input_file_size_MB', 'RAM_per_MB','Memory_Used_MB']].groupby(['Chromosome', 'Sample_Size'], as_index=False).mean()
 
-ALL_df = df[['Command','Sample_Size',  'Input_file_size_MB', 'RAM_per_MB']].groupby(['Command','Sample_Size'], as_index=False).mean()
+ALL_df = df[['Command','Sample_Size',  'Input_file_size_MB', 'RAM_per_MB','Memory_Used_MB']].groupby(['Command','Sample_Size'], as_index=False).mean()
 ALL_compress_df = ALL_df[ALL_df['Command'] == 'compress']
 ALL_decompress_df = ALL_df[ALL_df['Command'] == 'decompress']
 ALL_random_access_df = ALL_df[ALL_df['Command'] == 'random_access']
@@ -102,15 +102,15 @@ df['Input_file_size_MB'] = df['Input_file_size'] / 1048576
 df['RAM_per_MB'] = df['Memory_Used_MB'] / df['Input_file_size_MB']
 
 # Filter data for each command
-compress_df = df[df['Command'] == 'compress'][['Chromosome', 'Sample_Size',  'Input_file_size_MB', 'RAM_per_MB']].groupby(['Chromosome', 'Sample_Size'], as_index=False).mean()
-decompress_df = df[df['Command'] == 'decompress'][['Chromosome', 'Sample_Size',  'Input_file_size_MB', 'RAM_per_MB']].groupby(['Chromosome', 'Sample_Size'], as_index=False).mean()
-decompress_one_sample_df = df[df['Command'] == 'decompress_one_sample'][['Chromosome', 'Sample_Size', 'Input_file_size_MB', 'RAM_per_MB']].groupby(['Chromosome', 'Sample_Size'], as_index=False).mean()
+compress_df = df[df['Command'] == 'compress'][['Chromosome', 'Sample_Size',  'Input_file_size_MB', 'RAM_per_MB','Memory_Used_MB']].groupby(['Chromosome', 'Sample_Size'], as_index=False).mean()
+decompress_df = df[df['Command'] == 'decompress'][['Chromosome', 'Sample_Size',  'Input_file_size_MB', 'RAM_per_MB','Memory_Used_MB']].groupby(['Chromosome', 'Sample_Size'], as_index=False).mean()
+decompress_one_sample_df = df[df['Command'] == 'decompress_one_sample'][['Chromosome', 'Sample_Size', 'Input_file_size_MB', 'RAM_per_MB','Memory_Used_MB']].groupby(['Chromosome', 'Sample_Size'], as_index=False).mean()
 
 # For random_access, calculate the mean Time_per_MB for each Sample_Size
-random_access_df = df[df['Command'] == 'random_access'][['Chromosome', 'Sample_Size', 'Input_file_size_MB', 'RAM_per_MB']].groupby(['Chromosome', 'Sample_Size'], as_index=False).mean()
-random_access_one_sample_df = df[df['Command'] == 'random_access_one_sample'][['Chromosome', 'Sample_Size', 'Input_file_size_MB', 'RAM_per_MB']].groupby(['Chromosome', 'Sample_Size'], as_index=False).mean()
+random_access_df = df[df['Command'] == 'random_access'][['Chromosome', 'Sample_Size', 'Input_file_size_MB', 'RAM_per_MB','Memory_Used_MB']].groupby(['Chromosome', 'Sample_Size'], as_index=False).mean()
+random_access_one_sample_df = df[df['Command'] == 'random_access_one_sample'][['Chromosome', 'Sample_Size', 'Input_file_size_MB', 'RAM_per_MB','Memory_Used_MB']].groupby(['Chromosome', 'Sample_Size'], as_index=False).mean()
 
-ALL_df = df[['Command','Sample_Size',  'Input_file_size_MB', 'RAM_per_MB']].groupby(['Command','Sample_Size'], as_index=False).mean()
+ALL_df = df[['Command','Sample_Size',  'Input_file_size_MB', 'RAM_per_MB','Memory_Used_MB']].groupby(['Command','Sample_Size'], as_index=False).mean()
 ALL_compress_df = ALL_df[ALL_df['Command'] == 'compress']
 ALL_decompress_df = ALL_df[ALL_df['Command'] == 'decompress']
 ALL_decompress_one_sample_df = ALL_df[ALL_df['Command'] == 'decompress_one_sample']
@@ -159,12 +159,12 @@ plt.show()
 # Plot for the "decompress_one_sample" command
 plt.figure(figsize=(8, 5))
 for chromosome, group in decompress_one_sample_df.groupby('Chromosome'):
-    plt.plot(group['Sample_Size'], group['RAM_per_MB'], marker='o', color=color_map[chromosome], label=f'Chr {chromosome}')
-plt.plot(ALL_decompress_one_sample_df['Sample_Size'], ALL_decompress_one_sample_df['RAM_per_MB'],marker='o', color='black', label="Mean")
+    plt.plot(group['Sample_Size'], group['Memory_Used_MB'], marker='o', color=color_map[chromosome], label=f'Chr {chromosome}')
+plt.plot(ALL_decompress_one_sample_df['Sample_Size'], ALL_decompress_one_sample_df['Memory_Used_MB'],marker='o', color='black', label="Mean")
 plt.xlabel('Sample Size')
-plt.ylabel('RAM per MB')
+plt.ylabel('RAM (MB)')
 plt.xscale("log")
-titre = 'RAM per MB vs Sample Size for Decompress_one_sample Command (bis)'
+titre = 'RAM vs Sample Size for Decompress_one_sample Command (bis)'
 plt.title(titre)
 plt.legend(title='Chromosomes')#,bbox_to_anchor=(1.2, 1.1))
 plt.grid(True)
@@ -189,8 +189,8 @@ plt.show()
 # Plot for the "random_access_one_sample" command
 plt.figure(figsize=(8, 5))
 for chromosome, group in random_access_one_sample_df.groupby('Chromosome'):
-    plt.plot(group['Sample_Size'], group['RAM_per_MB'], marker='o', color=color_map[chromosome], label=f'Chr {chromosome}')
-plt.plot(ALL_random_access_one_sample_df['Sample_Size'], ALL_random_access_one_sample_df['RAM_per_MB'],marker='o', color='black', label="Mean")
+    plt.plot(group['Sample_Size'], group['Memory_Used_MB'], marker='o', color=color_map[chromosome], label=f'Chr {chromosome}')
+plt.plot(ALL_random_access_one_sample_df['Sample_Size'], ALL_random_access_one_sample_df['Memory_Used_MB'],marker='o', color='black', label="Mean")
 plt.xlabel('Sample Size')
 plt.ylabel('RAM per MB')
 plt.xscale("log")
