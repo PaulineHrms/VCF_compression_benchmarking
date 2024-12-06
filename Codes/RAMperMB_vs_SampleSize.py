@@ -164,7 +164,7 @@ plt.plot(ALL_decompress_one_sample_df['Sample_Size'], ALL_decompress_one_sample_
 plt.xlabel('Sample Size')
 plt.ylabel('RAM (MB)')
 plt.xscale("log")
-titre = 'RAM vs Sample Size for Decompress_one_sample Command (bis)'
+titre = 'RAM vs Sample Size for Decompress_one_sample Command'
 plt.title(titre)
 plt.legend(title='Chromosomes')#,bbox_to_anchor=(1.2, 1.1))
 plt.grid(True)
@@ -179,7 +179,7 @@ plt.plot(ALL_random_access_df['Sample_Size'], ALL_random_access_df['RAM_per_MB']
 plt.xlabel('Sample Size')
 plt.ylabel('RAM per MB')
 plt.xscale("log")
-titre = 'RAM per MB vs Sample Size for random_access Command (bis)'
+titre = 'RAM per MB vs Sample Size for Random Access Command (bis)'
 plt.title(titre)
 plt.legend(title='Chromosomes')#,bbox_to_anchor=(1.2, 1.1))
 plt.grid(True)
@@ -192,9 +192,9 @@ for chromosome, group in random_access_one_sample_df.groupby('Chromosome'):
     plt.plot(group['Sample_Size'], group['Memory_Used_MB'], marker='o', color=color_map[chromosome], label=f'Chr {chromosome}')
 plt.plot(ALL_random_access_one_sample_df['Sample_Size'], ALL_random_access_one_sample_df['Memory_Used_MB'],marker='o', color='black', label="Mean")
 plt.xlabel('Sample Size')
-plt.ylabel('RAM per MB')
+plt.ylabel('RAM')
 plt.xscale("log")
-titre = 'RAM per MB vs Sample Size for random_access_one_sample Command (bis)'
+titre = 'RAM vs Sample Size for Random access_one_sample Command'
 plt.title(titre)
 plt.legend(title='Chromosomes')#,bbox_to_anchor=(1.2, 1.1))
 plt.grid(True)
