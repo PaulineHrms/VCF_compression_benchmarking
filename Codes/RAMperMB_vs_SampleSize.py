@@ -12,7 +12,7 @@ import matplotlib.pyplot as plt
 #%%
 ################# ALL CHROM, SOME TESTS ##########################
 # Load the CSV file
-algo = "GSC"
+algo = "SVC"
 df = pd.read_csv("E:/VM_data/Git/VCF_compression_benchmarking/Data/"+algo+"_ALLchrom.csv")
 
 
@@ -158,15 +158,33 @@ if algo=="GSC":
     plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
     plt.show()
     
+    
     # Plot for the "decompress_one_sample" command
-    plt.figure(figsize=(8, 5))
+    #plt.figure(figsize=(8, 5))
     for chromosome, group in decompress_one_sample_df.groupby('Chromosome'):
-        plt.plot(group['Sample_Size'], group['Memory_Used_MB'], marker='o', color=color_map[chromosome], label=f'Chr {chromosome}')
+        plt.plot(group['Sample_Size'], group['Memory_Used_MB'],marker='o', color=color_map[chromosome], label=f'Chr {chromosome}')
     plt.plot(ALL_decompress_one_sample_df['Sample_Size'], ALL_decompress_one_sample_df['Memory_Used_MB'],marker='o', color='black', label="Mean")
     plt.xlabel('Sample Size')
     plt.ylabel('RAM (MB)')
     plt.xscale("log")
     titre = algo +' - RAM vs Sample Size for Decompress_one_sample Command'
+    plt.title(titre)
+    plt.legend(title='Chromosomes')#,bbox_to_anchor=(1.2, 1.1))
+    plt.grid(True)
+    #plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
+    plt.show()
+    
+    plt.figure(figsize=(8, 5))
+    for chromosome, group in decompress_df.groupby('Chromosome'):
+        plt.plot(group['Sample_Size'], group['Memory_Used_MB'], '--r', marker='o', color=color_map[chromosome],alpha = 0.5, label=f'Chr {chromosome} (complete)')
+    plt.plot(ALL_decompress_df['Sample_Size'], ALL_decompress_df['Memory_Used_MB'], '--r',marker='o', color='black',alpha = 0.5, label="Mean (complete)")
+    for chromosome, group in decompress_one_sample_df.groupby('Chromosome'):
+        plt.plot(group['Sample_Size'], group['Memory_Used_MB'], marker='o', color=color_map[chromosome], label=f'Chr {chromosome} (1 sample)')
+    plt.plot(ALL_decompress_one_sample_df['Sample_Size'], ALL_decompress_one_sample_df['Memory_Used_MB'],marker='o', color='black', label="Mean (1 sample)")
+    plt.xlabel('Sample Size')
+    plt.ylabel('RAM (MB)')
+    plt.xscale("log")
+    titre = algo +' - Comparison RAM vs Sample Size for complete and one sample Decompress Command '
     plt.title(titre)
     plt.legend(title='Chromosomes')#,bbox_to_anchor=(1.2, 1.1))
     plt.grid(True)
@@ -188,13 +206,28 @@ if algo=="GSC":
     plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
     plt.show()
     
+    plt.figure(figsize=(8, 5))
+    for chromosome, group in random_access_df.groupby('Chromosome'):
+        plt.plot(group['Sample_Size'], group['Memory_Used_MB'], marker='o', color=color_map[chromosome], label=f'Chr {chromosome}')
+    plt.plot(ALL_random_access_df['Sample_Size'], ALL_random_access_df['Memory_Used_MB'],marker='o', color='black', label="Mean")
+    plt.xlabel('Sample Size')
+    plt.ylabel('RAM (MB)')
+    plt.xscale("log")
+    titre = algo +' - RAM vs Sample Size for Random Access Command (bis)'
+    plt.title(titre)
+    plt.legend(title='Chromosomes')#,bbox_to_anchor=(1.2, 1.1))
+    plt.grid(True)
+    plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
+    plt.show()
+    
+    
     # Plot for the "random_access_one_sample" command
     plt.figure(figsize=(8, 5))
     for chromosome, group in random_access_one_sample_df.groupby('Chromosome'):
         plt.plot(group['Sample_Size'], group['Memory_Used_MB'], marker='o', color=color_map[chromosome], label=f'Chr {chromosome}')
     plt.plot(ALL_random_access_one_sample_df['Sample_Size'], ALL_random_access_one_sample_df['Memory_Used_MB'],marker='o', color='black', label="Mean")
     plt.xlabel('Sample Size')
-    plt.ylabel('RAM')
+    plt.ylabel('RAM (MB)')
     plt.xscale("log")
     titre = algo +' - RAM vs Sample Size for Random access_one_sample Command'
     plt.title(titre)
@@ -202,3 +235,20 @@ if algo=="GSC":
     plt.grid(True)
     plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
     plt.show()
+
+    plt.figure(figsize=(8, 5))
+    for chromosome, group in random_access_df.groupby('Chromosome'):
+        plt.plot(group['Sample_Size'], group['Memory_Used_MB'], '--r', marker='o', color=color_map[chromosome],alpha = 0.5, label=f'Chr {chromosome} (complete)')
+    plt.plot(ALL_random_access_df['Sample_Size'], ALL_random_access_df['Memory_Used_MB'], '--r',marker='o', color='black',alpha = 0.5, label="Mean (complete)")
+    for chromosome, group in random_access_one_sample_df.groupby('Chromosome'):
+        plt.plot(group['Sample_Size'], group['Memory_Used_MB'], marker='o', color=color_map[chromosome], label=f'Chr {chromosome} (1 sample)')
+    plt.plot(ALL_random_access_one_sample_df['Sample_Size'], ALL_random_access_one_sample_df['Memory_Used_MB'],marker='o', color='black', label="Mean (1 sample)")
+    plt.xlabel('Sample Size')
+    plt.ylabel('RAM (MB)')
+    plt.xscale("log")
+    titre = algo +' - Comparison RAM vs Sample Size for complete and one sample Random Access Command '
+    plt.title(titre)
+    plt.legend(title='Chromosomes')#,bbox_to_anchor=(1.2, 1.1))
+    plt.grid(True)
+    plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
+    plt.show()    

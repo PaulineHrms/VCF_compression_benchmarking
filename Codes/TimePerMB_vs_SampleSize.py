@@ -13,7 +13,7 @@ import numpy as np
 #%%
 ################# ALL CHROM, SOME TESTS ##########################
 # Load the CSV file
-algo = "GSC"
+algo = "SVC"
 df = pd.read_csv("E:/VM_data/Git/VCF_compression_benchmarking/Data/"+algo+"_ALLchrom.csv")
 
 # Convert Time_Taken from 'MM:SS.ss' to total seconds
@@ -90,9 +90,9 @@ for chromosome, group in random_access_df.groupby('Chromosome'):
 plt.plot(ALL_random_access_df['Sample_Size'], ALL_random_access_df['Time_per_MB'],marker='o', color='black', label="Mean")
 plt.xlabel('Sample Size')
 plt.xscale("log")
+plt.ylabel('Time per MB (seconds)')
 titre = algo +' - Time per MB vs Sample Size for Random Access Command'
-plt.ylabel(titre)
-plt.title('Time per MB vs Sample Size for Random Access Command')
+plt.title(titre)
 plt.legend(title='Chromosomes',bbox_to_anchor=(1.2, 1.1))
 plt.grid(True)
 plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
@@ -176,6 +176,7 @@ if algo == "GSC":
     plt.grid(True)
     plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
     plt.show()
+
     
     # Plot for the "decompress_one_sample" command
     plt.figure(figsize=(8, 5))
@@ -192,6 +193,26 @@ if algo == "GSC":
     plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
     plt.show()
     
+        
+    # Plot for the "decompress" command
+    plt.figure(figsize=(8, 5))
+    for chromosome, group in decompress_df.groupby('Chromosome'):
+        plt.plot(group['Sample_Size'], group['Time_Seconds'], '--r', marker='o',color=color_map[chromosome], alpha = 0.5, label=f'Chr {chromosome} (complete)')
+    plt.plot(ALL_decompress_df['Sample_Size'], ALL_decompress_df['Time_Seconds'], '--r',marker='o', color='black', alpha = 0.5, label="Mean (complete)")
+    for chromosome, group in decompress_one_sample_df.groupby('Chromosome'):
+        plt.plot(group['Sample_Size'], group['Time_Seconds'], marker='o', color=color_map[chromosome], label=f'Chr {chromosome} (1 sample)')
+    plt.plot(ALL_decompress_one_sample_df['Sample_Size'], ALL_decompress_one_sample_df['Time_Seconds'],marker='o', color='black', label="Mean (1 sample)")
+    plt.xlabel('Sample Size')
+    plt.ylabel('Time (seconds)')
+    plt.xscale("log")
+    titre = algo +' - Comparison Time vs Sample Size for complete and one sample Decompress Command'
+    plt.title(titre)
+    plt.legend(title='Chromosomes')#,bbox_to_anchor=(1.21, 1))
+    plt.grid(True)
+    plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
+    plt.show()
+    
+    
     # Plot for the "random_access" command with averaged Time_per_MB
     plt.figure(figsize=(8, 5))
     for chromosome, group in random_access_df.groupby('Chromosome'):
@@ -206,7 +227,7 @@ if algo == "GSC":
     plt.grid(True)
     plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
     plt.show()
-    
+
     
     # Plot for the "random_access" command with averaged Time_Seconds
     plt.figure(figsize=(8, 5))
@@ -219,6 +240,24 @@ if algo == "GSC":
     titre = algo +' - Time vs Sample Size for Random Access_one_sample Command'
     plt.title(titre)
     plt.legend(title='Chromosomses')#,bbox_to_anchor=(1.21, 1))
+    plt.grid(True)
+    plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
+    plt.show()
+    
+    # Plot for the "decompress" command
+    plt.figure(figsize=(8, 5))
+    for chromosome, group in random_access_df.groupby('Chromosome'):
+        plt.plot(group['Sample_Size'], group['Time_Seconds'], '--r', marker='o',color=color_map[chromosome], alpha = 0.5, label=f'Chr {chromosome} (complete)')
+    plt.plot(ALL_random_access_df['Sample_Size'], ALL_random_access_df['Time_Seconds'], '--r',marker='o', color='black', alpha = 0.5, label="Mean (complete)")
+    for chromosome, group in random_access_one_sample_df.groupby('Chromosome'):
+        plt.plot(group['Sample_Size'], group['Time_Seconds'], marker='o', color=color_map[chromosome], label=f'Chr {chromosome} (1 sample)')
+    plt.plot(ALL_random_access_one_sample_df['Sample_Size'], ALL_random_access_one_sample_df['Time_Seconds'],marker='o', color='black', label="Mean (1 sample)")
+    plt.xlabel('Sample Size')
+    plt.ylabel('Time (seconds)')
+    plt.xscale("log")
+    titre = algo +' - Comparison Time vs Sample Size for complete and one sample Random Access Command'
+    plt.title(titre)
+    plt.legend(title='Chromosomes')#,bbox_to_anchor=(1.21, 1))
     plt.grid(True)
     plt.savefig("E:\VM_data\Git\VCF_compression_benchmarking\Images\\" + titre, bbox_inches='tight')
     plt.show()
